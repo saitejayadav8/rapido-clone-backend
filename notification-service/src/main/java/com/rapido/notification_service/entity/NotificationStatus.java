@@ -1,8 +1,8 @@
 package com.rapido.notification_service.entity;
 
 public enum NotificationStatus {
-    PENDING,
-    SENT,
-    FAILED,
-    RETRYING
+    EMAIL_SENT,
+    SMS_SENT,
+    PUSH_SENT,
+    FAILED
 }

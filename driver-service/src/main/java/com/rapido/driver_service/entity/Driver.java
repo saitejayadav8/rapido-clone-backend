@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "drivers")
-public class Driver extends BaseEntity {
+public class Driver {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,17 +21,9 @@ public class Driver extends BaseEntity {
 
     private String vehicleModel;
 
-    private String vehicleType;
+    private Boolean available;
 
-    private Boolean available = false;
-
-    private Boolean online = false;
-
-    private Double currentLatitude;
-
-    private Double currentLongitude;
-
-    // Getters
+    private Boolean online;
 
     public Long getId() {
         return id;
@@ -57,10 +49,6 @@ public class Driver extends BaseEntity {
         return vehicleModel;
     }
 
-    public String getVehicleType() {
-        return vehicleType;
-    }
-
     public Boolean getAvailable() {
         return available;
     }
@@ -69,15 +57,9 @@ public class Driver extends BaseEntity {
         return online;
     }
 
-    public Double getCurrentLatitude() {
-        return currentLatitude;
+    public void setId(Long id) {
+        this.id = id;
     }
-
-    public Double getCurrentLongitude() {
-        return currentLongitude;
-    }
-
-    // Setters
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
@@ -99,23 +81,11 @@ public class Driver extends BaseEntity {
         this.vehicleModel = vehicleModel;
     }
 
-    public void setVehicleType(String vehicleType) {
-        this.vehicleType = vehicleType;
-    }
-
     public void setAvailable(Boolean available) {
         this.available = available;
     }
 
     public void setOnline(Boolean online) {
         this.online = online;
-    }
-
-    public void setCurrentLatitude(Double currentLatitude) {
-        this.currentLatitude = currentLatitude;
-    }
-
-    public void setCurrentLongitude(Double currentLongitude) {
-        this.currentLongitude = currentLongitude;
     }
 }

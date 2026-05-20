@@ -1,50 +1,62 @@
 package com.rapido.ride_service.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public class RideRequestDTO {
 
-    @NotNull(message = "Pickup latitude is required")
-    private Double pickupLatitude;
+    @NotNull(message = "User ID is required")
+    private Long userId;
 
-    @NotNull(message = "Pickup longitude is required")
-    private Double pickupLongitude;
+    @NotNull(message = "Driver ID is required")
+    private Long driverId;
 
-    @NotNull(message = "Drop latitude is required")
-    private Double dropLatitude;
+    @NotBlank(message = "Pickup location is required")
+    private String pickupLocation;
 
-    @NotNull(message = "Drop longitude is required")
-    private Double dropLongitude;
+    @NotBlank(message = "Drop location is required")
+    private String dropLocation;
 
-    public Double getPickupLatitude() {
-        return pickupLatitude;
+    @NotNull(message = "Fare is required")
+    private Double fare;
+
+    public Long getUserId() {
+        return userId;
     }
 
-    public Double getPickupLongitude() {
-        return pickupLongitude;
+    public Long getDriverId() {
+        return driverId;
     }
 
-    public Double getDropLatitude() {
-        return dropLatitude;
+    public String getPickupLocation() {
+        return pickupLocation;
     }
 
-    public Double getDropLongitude() {
-        return dropLongitude;
+    public String getDropLocation() {
+        return dropLocation;
     }
 
-    public void setPickupLatitude(Double pickupLatitude) {
-        this.pickupLatitude = pickupLatitude;
+    public Double getFare() {
+        return fare;
     }
 
-    public void setPickupLongitude(Double pickupLongitude) {
-        this.pickupLongitude = pickupLongitude;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public void setDropLatitude(Double dropLatitude) {
-        this.dropLatitude = dropLatitude;
+    public void setDriverId(Long driverId) {
+        this.driverId = driverId;
     }
 
-    public void setDropLongitude(Double dropLongitude) {
-        this.dropLongitude = dropLongitude;
+    public void setPickupLocation(String pickupLocation) {
+        this.pickupLocation = pickupLocation;
+    }
+
+    public void setDropLocation(String dropLocation) {
+        this.dropLocation = dropLocation;
+    }
+
+    public void setFare(Double fare) {
+        this.fare = fare;
     }
 }

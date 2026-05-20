@@ -1,17 +1,9 @@
 package com.rapido.ride_service.entity;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
-@Table(
-        name = "rides",
-        indexes = {
-                @Index(columnList = "userId"),
-                @Index(columnList = "driverId"),
-                @Index(columnList = "status")
-        }
-)
+@Table(name = "rides")
 public class Ride {
 
     @Id
@@ -22,24 +14,13 @@ public class Ride {
 
     private Long driverId;
 
-    private Double pickupLatitude;
+    private String pickupLocation;
 
-    private Double pickupLongitude;
+    private String dropLocation;
 
-    private Double dropLatitude;
+    private Double fare;
 
-    private Double dropLongitude;
-
-    @Enumerated(EnumType.STRING)
-    private RideStatus status;
-
-    private Double estimatedDistance;
-
-    private Double estimatedFare;
-
-    private LocalDateTime requestedAt;
-
-    private LocalDateTime completedAt;
+    private String status;
 
     public Long getId() {
         return id;
@@ -53,40 +34,24 @@ public class Ride {
         return driverId;
     }
 
-    public Double getPickupLatitude() {
-        return pickupLatitude;
+    public String getPickupLocation() {
+        return pickupLocation;
     }
 
-    public Double getPickupLongitude() {
-        return pickupLongitude;
+    public String getDropLocation() {
+        return dropLocation;
     }
 
-    public Double getDropLatitude() {
-        return dropLatitude;
+    public Double getFare() {
+        return fare;
     }
 
-    public Double getDropLongitude() {
-        return dropLongitude;
-    }
-
-    public RideStatus getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public Double getEstimatedDistance() {
-        return estimatedDistance;
-    }
-
-    public Double getEstimatedFare() {
-        return estimatedFare;
-    }
-
-    public LocalDateTime getRequestedAt() {
-        return requestedAt;
-    }
-
-    public LocalDateTime getCompletedAt() {
-        return completedAt;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setUserId(Long userId) {
@@ -97,39 +62,19 @@ public class Ride {
         this.driverId = driverId;
     }
 
-    public void setPickupLatitude(Double pickupLatitude) {
-        this.pickupLatitude = pickupLatitude;
+    public void setPickupLocation(String pickupLocation) {
+        this.pickupLocation = pickupLocation;
     }
 
-    public void setPickupLongitude(Double pickupLongitude) {
-        this.pickupLongitude = pickupLongitude;
+    public void setDropLocation(String dropLocation) {
+        this.dropLocation = dropLocation;
     }
 
-    public void setDropLatitude(Double dropLatitude) {
-        this.dropLatitude = dropLatitude;
+    public void setFare(Double fare) {
+        this.fare = fare;
     }
 
-    public void setDropLongitude(Double dropLongitude) {
-        this.dropLongitude = dropLongitude;
-    }
-
-    public void setStatus(RideStatus status) {
+    public void setStatus(String status) {
         this.status = status;
-    }
-
-    public void setEstimatedDistance(Double estimatedDistance) {
-        this.estimatedDistance = estimatedDistance;
-    }
-
-    public void setEstimatedFare(Double estimatedFare) {
-        this.estimatedFare = estimatedFare;
-    }
-
-    public void setRequestedAt(LocalDateTime requestedAt) {
-        this.requestedAt = requestedAt;
-    }
-
-    public void setCompletedAt(LocalDateTime completedAt) {
-        this.completedAt = completedAt;
     }
 }

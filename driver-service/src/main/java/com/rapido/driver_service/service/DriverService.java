@@ -1,9 +1,11 @@
 package com.rapido.driver_service.service;
 
-import com.rapido.driver_service.dto.DriverProfileDTO;
+import com.rapido.driver_service.dto.DriverRequest;
 import com.rapido.driver_service.entity.Driver;
 import com.rapido.driver_service.repository.DriverRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class DriverService {
@@ -14,68 +16,65 @@ public class DriverService {
         this.driverRepository = driverRepository;
     }
 
-    public DriverProfileDTO getProfile(String email) {
+    // Create Driver Profile
+    public Driver createDriver(DriverRequest request) {
 
-        Driver driver = driverRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("Driver profile not found"));
+        if (driverRepository.existsByEmail(request.getEmail())) {
+            throw new RuntimeException("Driver already exists with this email");
+        }
 
-        DriverProfileDTO dto = new DriverProfileDTO();
+        Driver driver = new Driver();
 
-        dto.setFullName(driver.getFullName());
-        dto.setEmail(driver.getEmail());
-        dto.setPhone(driver.getPhone());
-        dto.setVehicleNumber(driver.getVehicleNumber());
-        dto.setVehicleModel(driver.getVehicleModel());
-        dto.setVehicleType(driver.getVehicleType());
+        driver.setFullName(request.getFullName());
+        driver.setEmail(request.getEmail());
+        driver.setPhone(request.getPhone());
+        driver.setVehicleNumber(request.getVehicleNumber());
+        driver.setVehicleModel(request.getVehicleModel());
 
-        return dto;
+        driver.setAvailable(true);
+        driver.setOnline(true);
+
+        return driverRepository.save(driver);
     }
 
-    public void updateProfile(String email, DriverProfileDTO dto) {
+    // Get Driver By Email
+    public Driver getDriverByEmail(String email) {
 
-        Driver driver = driverRepository.findByEmail(email)
-                .orElseGet(Driver::new);
-
-        driver.setEmail(email);
-        driver.setFullName(dto.getFullName());
-        driver.setPhone(dto.getPhone());
-        driver.setVehicleNumber(dto.getVehicleNumber());
-        driver.setVehicleModel(dto.getVehicleModel());
-        driver.setVehicleType(dto.getVehicleType());
-
-        driverRepository.save(driver);
+        return driverRepository.findByEmail(email)
+                .orElseThrow(() ->
+                        new RuntimeException("Driver not found"));
     }
 
-    public void updateAvailability(String email, Boolean available) {
+    // Update Driver Availability
+    public Driver updateAvailability(String email,
+                                     Boolean available) {
 
         Driver driver = driverRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("Driver not found"));
+                .orElseThrow(() ->
+                        new RuntimeException("Driver not found"));
 
         driver.setAvailable(available);
 
-        driverRepository.save(driver);
+        return driverRepository.save(driver);
     }
 
-    public void updateOnlineStatus(String email, Boolean online) {
+    // Update Driver Online Status
+    public Driver updateOnlineStatus(String email,
+                                     Boolean online) {
 
         Driver driver = driverRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("Driver not found"));
+                .orElseThrow(() ->
+                        new RuntimeException("Driver not found"));
 
         driver.setOnline(online);
 
-        driverRepository.save(driver);
+        return driverRepository.save(driver);
     }
 
-    public void updateLocation(String email,
-                               Double latitude,
-                               Double longitude) {
+    // Get All Available Drivers
+    public List<Driver> getAvailableDrivers() {
 
-        Driver driver = driverRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("Driver not found"));
-
-        driver.setCurrentLatitude(latitude);
-        driver.setCurrentLongitude(longitude);
-
-        driverRepository.save(driver);
+        return driverRepository
+                .findByAvailableTrueAndOnlineTrue();
     }
 }

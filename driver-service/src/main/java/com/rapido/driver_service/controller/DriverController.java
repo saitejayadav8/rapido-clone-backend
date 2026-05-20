@@ -1,12 +1,16 @@
 package com.rapido.driver_service.controller;
 
-import com.rapido.driver_service.dto.DriverProfileDTO;
+import com.rapido.driver_service.dto.DriverRequest;
+import com.rapido.driver_service.entity.Driver;
 import com.rapido.driver_service.service.DriverService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
+@RequestMapping("/drivers")
 public class DriverController {
 
     private final DriverService driverService;
@@ -15,35 +19,47 @@ public class DriverController {
         this.driverService = driverService;
     }
 
-    @GetMapping("/driver/profile")
-    public ResponseEntity<DriverProfileDTO> getDriverProfile() {
-        return ResponseEntity.ok(driverService.getProfile("driver@example.com"));
+    @GetMapping("/test")
+    public ResponseEntity<String> test() {
+        return ResponseEntity.ok("Driver Service Working");
     }
 
-    @PutMapping("/driver/profile")
-    public ResponseEntity<String> updateDriverProfile(@Valid @RequestBody DriverProfileDTO dto) {
-        driverService.updateProfile(dto.getEmail(), dto);
-        return ResponseEntity.ok("Driver Profile Updated");
-    }
-
-    @PutMapping("/driver/availability")
-    public ResponseEntity<String> updateAvailability(@RequestParam Boolean available) {
-        driverService.updateAvailability("driver@example.com", available);
-        return ResponseEntity.ok("Availability Updated");
-    }
-
-    @PutMapping("/driver/online-status")
-    public ResponseEntity<String> updateOnlineStatus(@RequestParam Boolean online) {
-        driverService.updateOnlineStatus("driver@example.com", online);
-        return ResponseEntity.ok("Online Status Updated");
-    }
-
-    @PutMapping("/driver/location")
-    public ResponseEntity<String> updateLocation(
-            @RequestParam Double latitude,
-            @RequestParam Double longitude
+    @PostMapping("/profile")
+    public ResponseEntity<Driver> createDriver(
+            @Valid @RequestBody DriverRequest request
     ) {
-        driverService.updateLocation("driver@example.com", latitude, longitude);
-        return ResponseEntity.ok("Location Updated");
+        return ResponseEntity.ok(driverService.createDriver(request));
+    }
+
+    @GetMapping("/profile/{email}")
+    public ResponseEntity<Driver> getDriverByEmail(
+            @PathVariable String email
+    ) {
+        return ResponseEntity.ok(driverService.getDriverByEmail(email));
+    }
+
+    @PutMapping("/availability/{email}")
+    public ResponseEntity<Driver> updateAvailability(
+            @PathVariable String email,
+            @RequestParam Boolean available
+    ) {
+        return ResponseEntity.ok(
+                driverService.updateAvailability(email, available)
+        );
+    }
+
+    @PutMapping("/online/{email}")
+    public ResponseEntity<Driver> updateOnlineStatus(
+            @PathVariable String email,
+            @RequestParam Boolean online
+    ) {
+        return ResponseEntity.ok(
+                driverService.updateOnlineStatus(email, online)
+        );
+    }
+
+    @GetMapping("/available")
+    public ResponseEntity<List<Driver>> getAvailableDrivers() {
+        return ResponseEntity.ok(driverService.getAvailableDrivers());
     }
 }

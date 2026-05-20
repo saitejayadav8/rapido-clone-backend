@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class EventNotificationService {
 
-    private final NotificationService notificationService;
+    private final com.rapido.notification_service.service.NotificationService notificationService;
     private final NotificationTemplateService templateService;
 
     @Async
