@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="rapido_db@localhost" uuid="2bb575f9-5ff0-4249-ab17-3e0088d5bb2e">
+    <data-source source="LOCAL" name="rapido_db@localhost" uuid="c0a2c683-b2a1-41d9-aca0-b25cf6845bfe">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <imported>true</imported>
