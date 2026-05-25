@@ -20,7 +20,7 @@ jobs:
           java-version: 17
 
       - name: Build Application
-        run: mvn clean package -DskipTests
+        run: mvn clean package -DskipTests -U
 
       - name: Docker Build
         run: docker compose build
