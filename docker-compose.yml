@@ -1,5 +1,3 @@
-
-
 services:
 
   postgres:
@@ -39,7 +37,9 @@ services:
     restart: always
 
   eureka-server:
-    build: ./eureka-server
+    build:
+      context: ./eureka-server
+      dockerfile: Dockerfile
     container_name: eureka-server
     ports:
       - "8762:8761"
@@ -52,7 +52,9 @@ services:
     restart: always
 
   api-gateway:
-    build: ./api-gateway
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
     container_name: api-gateway
     ports:
       - "9090:9090"
@@ -63,7 +65,9 @@ services:
     restart: always
 
   auth-service:
-    build: ./auth-service
+    build:
+      context: ./auth-service
+      dockerfile: Dockerfile
     container_name: auth-service
     ports:
       - "8081:8081"
@@ -79,7 +83,9 @@ services:
     restart: always
 
   user-service:
-    build: ./user-service
+    build:
+      context: ./user-service
+      dockerfile: Dockerfile
     container_name: user-service
     ports:
       - "8082:8082"
@@ -94,7 +100,9 @@ services:
     restart: always
 
   driver-service:
-    build: ./driver-service
+    build:
+      context: ./driver-service
+      dockerfile: Dockerfile
     container_name: driver-service
     ports:
       - "8083:8083"
@@ -109,7 +117,9 @@ services:
     restart: always
 
   ride-service:
-    build: ./ride-service
+    build:
+      context: ./ride-service
+      dockerfile: Dockerfile
     container_name: ride-service
     ports:
       - "8084:8084"
@@ -125,7 +135,9 @@ services:
     restart: always
 
   payment-service:
-    build: ./payment-service
+    build:
+      context: ./payment-service
+      dockerfile: Dockerfile
     container_name: payment-service
     ports:
       - "8085:8085"
@@ -141,7 +153,9 @@ services:
     restart: always
 
   notification-service:
-    build: ./notification-service
+    build:
+      context: ./notification-service
+      dockerfile: Dockerfile
     container_name: notification-service
     ports:
       - "8086:8086"
