@@ -63,24 +63,23 @@ services:
     depends_on:
       - eureka-server
     restart: always
-
-  auth-service:
-    build:
-      context: ./auth-service
-      dockerfile: ../Dockerfile.auth
-    container_name: auth-service
-    ports:
-      - "8081:8081"
-    environment:
-      DB_USERNAME: rapido_user
-      DB_PASSWORD: rapido_pass
-      JWT_SECRET: super_secret_key_for_rapido_backend
-    networks:
-      - rapido-network
-    depends_on:
-      - postgres
-      - eureka-server
-    restart: always
+  # auth-service:
+  #   build:
+  #     context: ./auth-service
+  #     dockerfile: ../Dockerfile.auth
+  #   container_name: auth-service
+  #   ports:
+  #     - "8081:8081"
+  #   environment:
+  #     DB_USERNAME: rapido_user
+  #     DB_PASSWORD: rapido_pass
+  #     JWT_SECRET: super_secret_key_for_rapido_backend
+  #   networks:
+  #     - rapido-network
+  #   depends_on:
+  #     - postgres
+  #     - eureka-server
+  #   restart: always
 
   user-service:
     build:
