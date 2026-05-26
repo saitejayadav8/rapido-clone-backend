@@ -63,23 +63,6 @@ services:
     depends_on:
       - eureka-server
     restart: always
-  # auth-service:
-  #   build:
-  #     context: ./auth-service
-  #     dockerfile: ../Dockerfile.auth
-  #   container_name: auth-service
-  #   ports:
-  #     - "8081:8081"
-  #   environment:
-  #     DB_USERNAME: rapido_user
-  #     DB_PASSWORD: rapido_pass
-  #     JWT_SECRET: super_secret_key_for_rapido_backend
-  #   networks:
-  #     - rapido-network
-  #   depends_on:
-  #     - postgres
-  #     - eureka-server
-  #   restart: always
 
   user-service:
     build:
@@ -169,8 +152,31 @@ services:
       - rabbitmq
     restart: always
 
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    ports:
+      - "9091:9090"
+    volumes:
+      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - rapido-network
+    restart: always
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    networks:
+      - rapido-network
+    depends_on:
+      - prometheus
+    restart: always
+
 networks:
   rapido-network:
+    driver: bridge
 
 volumes:
   postgres-data:
