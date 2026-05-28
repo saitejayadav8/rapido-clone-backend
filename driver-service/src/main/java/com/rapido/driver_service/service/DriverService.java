@@ -16,11 +16,10 @@ public class DriverService {
         this.driverRepository = driverRepository;
     }
 
-    // Create Driver Profile
     public Driver createDriver(DriverRequest request) {
 
         if (driverRepository.existsByEmail(request.getEmail())) {
-            throw new RuntimeException("Driver already exists with this email");
+            throw new RuntimeException("Driver already exists");
         }
 
         Driver driver = new Driver();
@@ -28,8 +27,8 @@ public class DriverService {
         driver.setFullName(request.getFullName());
         driver.setEmail(request.getEmail());
         driver.setPhone(request.getPhone());
-        driver.setVehicleNumber(request.getVehicleNumber());
         driver.setVehicleModel(request.getVehicleModel());
+        driver.setVehicleNumber(request.getVehicleNumber());
 
         driver.setAvailable(true);
         driver.setOnline(true);
@@ -37,44 +36,36 @@ public class DriverService {
         return driverRepository.save(driver);
     }
 
-    // Get Driver By Email
+    public List<Driver> getAllDrivers() {
+        return driverRepository.findAll();
+    }
+
     public Driver getDriverByEmail(String email) {
 
         return driverRepository.findByEmail(email)
-                .orElseThrow(() ->
-                        new RuntimeException("Driver not found"));
+                .orElseThrow(() -> new RuntimeException("Driver not found"));
     }
 
-    // Update Driver Availability
-    public Driver updateAvailability(String email,
-                                     Boolean available) {
+    public Driver updateAvailability(String email, Boolean available) {
 
-        Driver driver = driverRepository.findByEmail(email)
-                .orElseThrow(() ->
-                        new RuntimeException("Driver not found"));
+        Driver driver = getDriverByEmail(email);
 
         driver.setAvailable(available);
 
         return driverRepository.save(driver);
     }
 
-    // Update Driver Online Status
-    public Driver updateOnlineStatus(String email,
-                                     Boolean online) {
+    public Driver updateOnlineStatus(String email, Boolean online) {
 
-        Driver driver = driverRepository.findByEmail(email)
-                .orElseThrow(() ->
-                        new RuntimeException("Driver not found"));
+        Driver driver = getDriverByEmail(email);
 
         driver.setOnline(online);
 
         return driverRepository.save(driver);
     }
 
-    // Get All Available Drivers
     public List<Driver> getAvailableDrivers() {
 
-        return driverRepository
-                .findByAvailableTrueAndOnlineTrue();
+        return driverRepository.findByAvailableTrueAndOnlineTrue();
     }
 }

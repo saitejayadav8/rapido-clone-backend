@@ -31,35 +31,26 @@ public class DriverController {
         return ResponseEntity.ok(driverService.createDriver(request));
     }
 
-    @GetMapping("/profile/{email}")
-    public ResponseEntity<Driver> getDriverByEmail(
-            @PathVariable String email
-    ) {
-        return ResponseEntity.ok(driverService.getDriverByEmail(email));
+    @GetMapping
+    public ResponseEntity<List<Driver>> getAllDrivers() {
+        return ResponseEntity.ok(driverService.getAllDrivers());
     }
-
-    @PutMapping("/availability/{email}")
-    public ResponseEntity<Driver> updateAvailability(
-            @PathVariable String email,
-            @RequestParam Boolean available
-    ) {
-        return ResponseEntity.ok(
-                driverService.updateAvailability(email, available)
-        );
-    }
-
-    @PutMapping("/online/{email}")
-    public ResponseEntity<Driver> updateOnlineStatus(
-            @PathVariable String email,
-            @RequestParam Boolean online
-    ) {
-        return ResponseEntity.ok(
-                driverService.updateOnlineStatus(email, online)
-        );
-    }
-
-    @GetMapping("/available")
-    public ResponseEntity<List<Driver>> getAvailableDrivers() {
-        return ResponseEntity.ok(driverService.getAvailableDrivers());
-    }
+@GetMapping("/available")
+public ResponseEntity<List<Driver>> getAvailableDrivers() {
+    return ResponseEntity.ok(driverService.getAvailableDrivers());
+}
+@PutMapping("/availability/{email}")
+public ResponseEntity<Driver> updateAvailability(
+        @PathVariable String email,
+        @RequestParam Boolean available
+) {
+    return ResponseEntity.ok(driverService.updateAvailability(email, available));
+}
+@PutMapping("/online/{email}")
+public ResponseEntity<Driver> updateOnlineStatus(
+        @PathVariable String email,
+        @RequestParam Boolean online
+) {
+    return ResponseEntity.ok(driverService.updateOnlineStatus(email, online));
+}
 }
