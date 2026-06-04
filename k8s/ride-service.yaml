@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ride-service
+  namespace: rapido-prod
+spec:
+  selector:
+    app: ride-service
+  ports:
+    - port: 8084
+      targetPort: 8084
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ride-service
+  namespace: rapido-prod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ride-service
+  template:
+    metadata:
+      labels:
+        app: ride-service
+    spec:
+      containers:
+        - name: ride-service
+          image: ride-service:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8084
+          envFrom:
+            - configMapRef:
+                name: rapido-config
+            - secretRef:
+                name: rapido-secret

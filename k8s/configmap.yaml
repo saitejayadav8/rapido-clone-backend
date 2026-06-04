@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rapido-config
+  namespace: rapido-prod
+data:
+  EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://eureka-server:8761/eureka/"
+  SPRING_PROFILES_ACTIVE: "k8s"
