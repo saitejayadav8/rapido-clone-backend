@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
         - name: driver-service
-          image: driver-service:latest
+          image: driver-service:v2
           imagePullPolicy: Never
           ports:
             - containerPort: 8083

@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
         - name: ride-service
-          image: ride-service:latest
+          image: ride-service:v3
           imagePullPolicy: Never
           ports:
             - containerPort: 8084

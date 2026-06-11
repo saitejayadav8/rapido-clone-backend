@@ -3,34 +3,43 @@ kind: Service
 metadata:
   name: user-service
   namespace: rapido-prod
+
 spec:
   selector:
     app: user-service
+
   ports:
     - port: 8082
       targetPort: 8082
+
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: user-service
   namespace: rapido-prod
+
 spec:
   replicas: 1
+
   selector:
     matchLabels:
       app: user-service
+
   template:
     metadata:
       labels:
         app: user-service
+
     spec:
       containers:
         - name: user-service
-          image: user-service:v3
+          image: user-service:v4
           imagePullPolicy: Never
+
           ports:
             - containerPort: 8082
+
           envFrom:
             - configMapRef:
                 name: rapido-config
