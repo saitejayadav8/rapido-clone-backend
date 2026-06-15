@@ -3,8 +3,11 @@ package com.rapido.ride_service.controller;
 import com.rapido.ride_service.dto.RideRequestDTO;
 import com.rapido.ride_service.entity.Ride;
 import com.rapido.ride_service.service.RideService;
+
 import jakarta.validation.Valid;
+
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,34 +28,47 @@ public class RideController {
     }
 
     @PostMapping("/request")
+    @PreAuthorize("hasAuthority('SCOPE_ride.write')")
     public ResponseEntity<Ride> createRide(
             @Valid @RequestBody RideRequestDTO requestDTO
     ) {
-        return ResponseEntity.ok(rideService.createRide(requestDTO));
+        return ResponseEntity.ok(
+                rideService.createRide(requestDTO)
+        );
     }
 
     @GetMapping("/{rideId}")
+    @PreAuthorize("hasAuthority('SCOPE_ride.read')")
     public ResponseEntity<Ride> getRideById(
             @PathVariable Long rideId
     ) {
-        return ResponseEntity.ok(rideService.getRideById(rideId));
+        return ResponseEntity.ok(
+                rideService.getRideById(rideId)
+        );
     }
 
     @GetMapping("/user/{userId}")
+    @PreAuthorize("hasAuthority('SCOPE_ride.read')")
     public ResponseEntity<List<Ride>> getRidesByUser(
             @PathVariable Long userId
     ) {
-        return ResponseEntity.ok(rideService.getRidesByUser(userId));
+        return ResponseEntity.ok(
+                rideService.getRidesByUser(userId)
+        );
     }
 
     @GetMapping("/driver/{driverId}")
+    @PreAuthorize("hasAuthority('SCOPE_ride.read')")
     public ResponseEntity<List<Ride>> getRidesByDriver(
             @PathVariable Long driverId
     ) {
-        return ResponseEntity.ok(rideService.getRidesByDriver(driverId));
+        return ResponseEntity.ok(
+                rideService.getRidesByDriver(driverId)
+        );
     }
 
     @PutMapping("/{rideId}/status")
+    @PreAuthorize("hasAuthority('SCOPE_ride.write')")
     public ResponseEntity<Ride> updateRideStatus(
             @PathVariable Long rideId,
             @RequestParam String status

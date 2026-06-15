@@ -2,90 +2,42 @@ package com.rapido.driver_service.entity;
 
 import jakarta.persistence.*;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
 @Table(name = "drivers")
+@Getter
+@Setter
 public class Driver {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String fullName;
+    private String name;
 
-    @Column(unique = true)
     private String email;
 
     private String phone;
 
+    @Column(name = "vehicle_number")
     private String vehicleNumber;
-
-    private String vehicleModel;
 
     private Boolean available;
 
-    private Boolean online;
+    private Double latitude;
 
-    public Long getId() {
-        return id;
-    }
+    private Double longitude;
 
-    public String getFullName() {
-        return fullName;
-    }
+    private Double rating;
 
-    public String getEmail() {
-        return email;
-    }
+    @Column(name = "acceptance_rate")
+    private Double acceptanceRate;
 
-    public String getPhone() {
-        return phone;
-    }
+    @Column(name = "cancellation_rate")
+    private Double cancellationRate;
 
-    public String getVehicleNumber() {
-        return vehicleNumber;
-    }
-
-    public String getVehicleModel() {
-        return vehicleModel;
-    }
-
-    public Boolean getAvailable() {
-        return available;
-    }
-
-    public Boolean getOnline() {
-        return online;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public void setVehicleNumber(String vehicleNumber) {
-        this.vehicleNumber = vehicleNumber;
-    }
-
-    public void setVehicleModel(String vehicleModel) {
-        this.vehicleModel = vehicleModel;
-    }
-
-    public void setAvailable(Boolean available) {
-        this.available = available;
-    }
-
-    public void setOnline(Boolean online) {
-        this.online = online;
-    }
+    @Column(name = "current_load")
+    private Integer currentLoad;
 }

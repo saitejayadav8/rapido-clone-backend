@@ -3,7 +3,9 @@ package com.rapido.driver_service.controller;
 import com.rapido.driver_service.dto.DriverRequest;
 import com.rapido.driver_service.entity.Driver;
 import com.rapido.driver_service.service.DriverService;
+
 import jakarta.validation.Valid;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +31,11 @@ public class DriverController {
             @Valid @RequestBody DriverRequest request
     ) {
         return ResponseEntity.ok(driverService.createDriver(request));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Driver>> getAllDrivers() {
+        return ResponseEntity.ok(driverService.getAllDrivers());
     }
 
     @GetMapping("/profile/{email}")
@@ -60,6 +67,8 @@ public class DriverController {
 
     @GetMapping("/available")
     public ResponseEntity<List<Driver>> getAvailableDrivers() {
-        return ResponseEntity.ok(driverService.getAvailableDrivers());
+        return ResponseEntity.ok(
+                driverService.getAvailableDrivers()
+        );
     }
 }

@@ -4,14 +4,14 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/driver")
+public class DriverController {
 
-    @GetMapping("/{email}/payments")
+    @GetMapping("/{email}/rides")
     @PreAuthorize("#email == authentication.name || hasRole('SUPER_ADMIN')")
-    public String getPayments(
+    public String getDriverRides(
             @PathVariable String email) {
 
-        return "Payments for user: " + email;
+        return "Rides for driver: " + email;
     }
 }
