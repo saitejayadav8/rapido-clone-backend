@@ -97,7 +97,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<mainClass>com.rapido.eureka_server.EurekaServerApplication</mainClass>
+					<mainClass>com.rapido.auth_service.AuthServiceApplication</mainClass>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
