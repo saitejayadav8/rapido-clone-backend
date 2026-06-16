@@ -31,6 +31,10 @@
 		<spring-cloud.version>2025.0.2</spring-cloud.version>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka</artifactId>
+		</dependency>
 		<!-- Actuator -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -92,7 +96,11 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-
+				<configuration>
+					<mainClass>
+						com.rapido.driver_service.DriverServiceApplication
+					</mainClass>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

@@ -1,0 +1,7 @@
+com\rapido\driver_service\controller\DriverController.class
+com\rapido\driver_service\repository\DriverRepository.class
+com\rapido\driver_service\entity\BaseEntity.class
+com\rapido\driver_service\entity\Driver.class
+com\rapido\driver_service\dto\DriverRequest.class
+com\rapido\driver_service\dto\DriverProfileDTO.class
+com\rapido\driver_service\service\DriverService.class
