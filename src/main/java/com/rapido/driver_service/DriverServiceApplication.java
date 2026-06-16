@@ -10,11 +10,11 @@ import org.springframework.kafka.annotation.EnableKafka;
 @EnableKafka
 public class DriverServiceApplication {
 
-    public static void main(String[] args) {
+	public static void main(String[] args) {
 
-        SpringApplication.run(
-                DriverServiceApplication.class,
-                args
-        );
-    }
+		SpringApplication.run(
+				DriverServiceApplication.class,
+				args
+		);
+	}
 }
